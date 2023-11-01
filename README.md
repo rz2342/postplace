@@ -1,52 +1,49 @@
 The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
 
-(__TODO__: your project name)
-
-# Shoppy Shoperson 
+# PostPlace
 
 ## Overview
 
-(__TODO__: a brief one or two paragraph, high-level description of your project)
-
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
-
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
-
+PostPlace is a web app that will provide basic social media functionalities such as logging in, creating posts, editing your profile, and commenting on posts. Users must register for an account or log in with a visitor account before being able to see posts. 
 
 ## Data Model
 
-(__TODO__: a description of your application's data and their relationships to each other) 
+The application will store Users, Posts, and Comments.
 
-The application will store Users, Lists and Items
-
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
-
-(__TODO__: sample documents)
+- users can have multiple posts (via references)
+- posts can have multiple comments (via references)
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
-  hash: // a password hash,
-  lists: // an array of references to List documents
+  name: "Ricky Zhang",
+  username: "rz2342",
+  password: // a password hash,
+  posts: // an array of Post ids
 }
 ```
 
-An Example List with Embedded Items:
+An Example Post:
 
 ```javascript
 {
-  user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
-  createdAt: // timestamp
+  content: "content of the post",
+  user: // the _id of the user who created the post,
+  timestamp: // the timestamp of when the post was created,
+  comments: // an array of Comment ids
 }
 ```
+
+An example Comment:
+
+```javascript
+{
+  content: "content of the comment",
+  user: // the _id of the user who created the comment,
+  timestamp: // the timestamp of when the comment was created,
+  post: // the id of the post
+}
 
 
 ## [Link to Commented First Draft Schema](db.mjs) 
