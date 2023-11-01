@@ -43,7 +43,7 @@ An example Comment:
   timestamp: // the timestamp of when the comment was created,
   post: // the id of the post
 }
-
+```
 
 ## [Link to Commented First Draft Schema](db.mjs) 
 
