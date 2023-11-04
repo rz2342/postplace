@@ -1,13 +1,17 @@
-import '../globals.css'
+import Provider from "@/components/Provider";
+import "@/globals.css";
 
 export const metadata = {
-  title: 'Log in',
-}
+  title: "PostPlace",
+  description: "Sign in page",
+};
 
-export default function RootLayout({ children }) {
-  return (
-    <html className='dark' lang="en">
-      <body>{children}</body>
-    </html>
-  )
-}
+const RootLayout = ({ children }) => (
+  <html lang="en" className="dark">
+    <body className="relative">
+      <Provider>{children}</Provider>
+    </body>
+  </html>
+);
+
+export default RootLayout;

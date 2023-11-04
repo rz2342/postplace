@@ -2,7 +2,7 @@
 
 ## Overview
 
-PostPlace is a web app that will provide basic social media functionalities such as logging in, creating posts, editing your profile, and commenting on posts. Users must register for an account or log in with a visitor account before being able to see posts. 
+PostPlace is a web app that will provide basic social media functionalities such as logging in, creating posts, editing your profile, and commenting on posts. Users must register for an account or log in with a visitor account before being able to see posts.
 
 ## Data Model
 
@@ -45,7 +45,7 @@ An example Comment:
 }
 
 
-## [Link to Commented First Draft Schema](db.mjs) 
+## [Link to Commented First Draft Schema](db.mjs)
 
 ![schema](db.mjs)
 
@@ -85,7 +85,7 @@ An example Comment:
 10 points total out of 10 required points
 
 
-## [Link to Initial Main Project File](app.mjs) 
+## [Link to Initial Main Project File](app.mjs)
 
 ![schema](/app/(signup)/page.js)
 
@@ -97,3 +97,4 @@ An example Comment:
 3. [Tailwind docs](https://tailwindcss.com/docs/installation)
 
 
+```

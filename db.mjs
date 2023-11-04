@@ -1,27 +1,25 @@
-import { Schema, model, models } from "mongoose";
+import mongoose from "mongoose";
 
-const UserSchema = new Schema({
-  name: { type: String, required: true },
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  profilePicUrl: { type: String },
-  password: { type: String },
-  posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
-});
+let isConnected = false; // track the connection
 
-const commentSchema = new Schema({
-    content: { type: String, required: true },
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    post: { type: Schema.Types.ObjectId, ref: "Post", required: true },
-    timestamp: { type: Date, default: Date.now },
-});
+const connectToDB = async () => {
+  mongoose.set("strictQuery", true);
 
-const PostSchema = new Schema({
-    content: { type: String, required: true },
-    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    timestamp: { type: Date, default: Date.now },
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-});
+  if (isConnected) {
+    console.log('db already connected')
+    return;
+  }
+
+  try {
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('connected to db')
+    isConnected = true;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default connectToDB;
