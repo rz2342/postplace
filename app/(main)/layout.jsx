@@ -8,7 +8,7 @@ export const metadata = {
 
 const RootLayout = ({ children }) => (
   <html lang="en">
-    <body>
+    <body className='bg-slate-300 dark:bg-slate-900'>
       <Provider>
         <div>
           <NavBar />

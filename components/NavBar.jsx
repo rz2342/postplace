@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { isDarkMode, toggleDarkMode } from "@/lib/utils";
 import { Sun, Moon } from "lucide-react";
+import ProfileDropdown from "@/components/ProfileDropdown";
 
 export default function NavBar() {
   const { data: session, status } = useSession();
@@ -46,25 +47,19 @@ export default function NavBar() {
     setIsDark(isDarkMode());
   }, [])
 
-  const handleLogout = () => {
-    signOut({ callbackUrl: "/" });
-  };
-
   return (
-    <div class="bg-white dark:bg-gray-800 w-full p-4 flex justify-between items-center">
-      <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+    <div className="bg-gray-800 dark:bg-gray-800 w-full p-4 flex justify-between items-center">
+      <h1 className="text-2xl font-bold text-white">
         PostPlace
       </h1>
-      <div class="flex items-center">
-        <button class="mr-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Button Text
-        </button>
+      <div className="flex items-center gap-4">
+        <ProfileDropdown />
         <div className="flex items-center space-x-2">
           <Switch id="dark-mode" onCheckedChange={() => {
             toggleDarkMode();
             setIsDark((prev) => !prev)
           }} checked={isDark} />
-          <Label htmlFor="dark-mode">{isDark ? <Moon /> : <Sun />}</Label>
+          <Label htmlFor="dark-mode">{isDark ? <Moon /> : <Sun className='stroke-white' />}</Label>
       </div>
       </div>
     </div>
