@@ -25,7 +25,11 @@ const SignIn = () => {
 
   return (
     <div>
-      {signupCard ? <CardSignup switchToSignup={setSignupCard} /> : <CardLogin switchToSignup={setSignupCard} />}
+      {signupCard ? (
+        <CardSignup switchToSignup={setSignupCard} />
+      ) : (
+        <CardLogin switchToSignup={setSignupCard} />
+      )}
       <button className="absolute top-0 right-0" onClick={toggle}>
         Toggle
       </button>

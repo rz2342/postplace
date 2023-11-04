@@ -1,16 +1,17 @@
-import Provider from '@/components/Provider'
+import Provider from "@/components/Provider";
+import NavBar from "@/components/NavBar";
+import "@/globals.css"
 
 export const metadata = {
   title: "PostPlace",
 };
 
 const RootLayout = ({ children }) => (
-  <html lang="en" data-bs-theme="dark">
+  <html lang="en">
     <body>
       <Provider>
-
         <div>
-          {/*<NavBar />*/}
+          <NavBar />
           <main>{children}</main>
           {/*<Footer />*/}
         </div>

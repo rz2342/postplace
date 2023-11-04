@@ -78,17 +78,15 @@ An example Comment:
 
 ## Research Topics
 
-* (2 points) NextAuth.js
-* (2 points) TailwindCSS
-* (6 points) Next.js
+- (2 points) NextAuth.js
+- (2 points) TailwindCSS
+- (6 points) Next.js
 
 10 points total out of 10 required points
 
-
 ## [Link to Initial Main Project File](app.mjs)
 
-![schema](/app/(signup)/page.js)
-
+![schema](</app/(signup)/page.js>)
 
 ## Annotations / References Used
 
@@ -96,5 +94,6 @@ An example Comment:
 2. [Nextauth docs](https://next-auth.js.org/getting-started/introduction)
 3. [Tailwind docs](https://tailwindcss.com/docs/installation)
 
+```
 
 ```

@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 const RootLayout = ({ children }) => (
-  <html lang="en" className="dark">
+  <html lang="en">
     <body className="relative">
       <Provider>{children}</Provider>
     </body>

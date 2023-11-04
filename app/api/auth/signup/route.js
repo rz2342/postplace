@@ -11,9 +11,12 @@ export async function POST(req) {
     const user = await User.findOne({ username: reqData.username });
     if (user) {
       console.log("username alredy exists in database");
-      return NextResponse.json({
-        error: 'username already taken',
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          error: "username already taken",
+        },
+        { status: 400 },
+      );
     }
     // username available, save user to db
     const hashedPassword = bcrypt.hashSync(reqData.password, 10);
