@@ -25,7 +25,6 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea"
 import Image from "next/image";
@@ -37,7 +36,7 @@ const formSchema = z.object({
     }),
   });
 
-const NewPostCard = () => {
+const NewPostCard = ({ profileImage }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -46,13 +45,23 @@ const NewPostCard = () => {
         },
       });
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (values) => {
     setIsSubmitting(true);
+    const res = await fetch('/api/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(values)
+    });
+    if (res.status === 201) {
+      location.reload();
+    }
   };
 
   return (
     <div className="bg-white dark:bg-gray-800 p-4 rounded-md shadow-md flex gap-3 max-w-2xl relative w-full">
-        <Image className="w-12 h-12 rounded-full" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzykHG9uAxSMQWR-w0PL11LVzi2WD9IcXruJNMu0WMWQ&s" alt="User Profile" height={100} width={100} />
+        <Image className="w-12 h-12 rounded-full" src={profileImage? profileImage : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzykHG9uAxSMQWR-w0PL11LVzi2WD9IcXruJNMu0WMWQ&s'} alt="User Profile" height={100} width={100} />
 
         <Dialog>
             <DialogTrigger asChild>
@@ -78,6 +87,7 @@ const NewPostCard = () => {
               <FormItem>
                 <FormControl>
                     <Textarea
+                            id='new-post'
                             className="form-textarea mt-1 block w-full rounded-md bg-gray-100 dark:bg-gray-700 focus:outline-none" 
                             rows="3" 
                             disabled={isSubmitting}

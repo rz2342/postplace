@@ -48,6 +48,7 @@ export const authOptions = {
       if (account?.provider === "credentials") {
         //token.accessToken = user.token;
         token.userId = user.user._id;
+        token.profilePicUrl = user.user.profilePicUrl;
         // console.log("u signed in with credentials. token is now ", token);
       }
       return token;
@@ -59,6 +60,7 @@ export const authOptions = {
       // console.log("token is ", token);
       //session.accessToken = token.accessToken;
       session.user.userId = token.userId;
+      session.user.profilePicUrl = token.profilePicUrl;
       // session stores user object (name, email, image, userID), accessToken, and expires
       return session;
     },

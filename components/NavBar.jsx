@@ -11,7 +11,7 @@ import { isDarkMode, toggleDarkMode } from "@/lib/utils";
 import { Sun, Moon } from "lucide-react";
 import ProfileDropdown from "@/components/ProfileDropdown";
 
-export default function NavBar() {
+export default function NavBar({ profileImage }) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [authuserData, setAuthuserData] = useState({});
@@ -53,7 +53,7 @@ export default function NavBar() {
         PostPlace
       </h1>
       <div className="flex items-center gap-4">
-        <ProfileDropdown />
+        <ProfileDropdown profileImage={profileImage} />
         <div className="flex items-center space-x-2">
           <Switch id="dark-mode" onCheckedChange={() => {
             toggleDarkMode();

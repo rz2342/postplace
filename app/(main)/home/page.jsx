@@ -1,9 +1,14 @@
 import NewPostCard from "@/components/NewPostCard";
+import FeedList from "@/components/FeedList";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-const Page = () => {
+const Page = async () => {
+  const session = await getServerSession(authOptions);
   return (
     <div className="flex flex-col gap-10 items-center py-10">
-      <NewPostCard />
+      <NewPostCard profileImage={session.user.profilePicUrl} />
+      <FeedList profileImage={session.user.profilePicUrl} />
     </div>
   )
 };

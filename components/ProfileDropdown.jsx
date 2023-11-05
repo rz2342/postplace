@@ -34,12 +34,12 @@ import {
 import Image from "next/image";
 import { signOut } from 'next-auth/react';
   
-const ProfileDropdown = () => {
+const ProfileDropdown = ({ profileImage }) => {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" size='circle' className='relative'>
-            <Image className="rounded-full" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzykHG9uAxSMQWR-w0PL11LVzi2WD9IcXruJNMu0WMWQ&s' alt='image' fill/>
+            <Image className="rounded-full" src={profileImage? profileImage : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzykHG9uAxSMQWR-w0PL11LVzi2WD9IcXruJNMu0WMWQ&s'} alt='image' fill/>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
