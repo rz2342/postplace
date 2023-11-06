@@ -55,16 +55,12 @@ export default function CardLogin({ switchToSignup }) {
   };
 
   const handleVisitorLogin = async () => {
-    setLoginLoading(true);
-    setLoginFailed(false);
-    const res = await fetch(`/api/auth/general-visitor-login`, {
+    setIsSubmitting(true);
+    const res = await fetch(`/api/auth/visitor-login`, {
       method: "POST",
     });
     const data = await res.json();
-    console.log(
-      "we back to handleVisitorLogin function. we called general visitor login api. the res is ",
-      data,
-    );
+    console.log('data is ', data);
     // should return newly created (or existing) user object. Use user object to sign in, but use unhashed pw
     const signInRes = await signIn("credentials", {
       redirect: false,
@@ -156,6 +152,7 @@ export default function CardLogin({ switchToSignup }) {
             <div className="text-sm">
               <a
                 disabled={isSubmitting}
+                onClick={handleVisitorLogin}
                 className="font-medium cursor-pointer text-indigo-600 dark:text-purple-400 hover:text-indigo-500 dark:hover:text-purple-300"
               >
                 Log in as Guest

@@ -33,6 +33,12 @@ const SignIn = () => {
     setIsDark(isDarkMode());
   }, [])
 
+  // determine if dark mode is enabled before rendering page
+  const dark = localStorage.getItem('dark');
+  if (dark === 'true') {
+    document.documentElement.classList.add('dark');
+  }
+
   return (
     <div>
       <div className="fixed z-50 bg-gray-800 dark:bg-gray-800 w-full p-4 flex justify-between items-center">

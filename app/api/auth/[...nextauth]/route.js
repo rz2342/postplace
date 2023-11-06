@@ -41,27 +41,18 @@ export const authOptions = {
     },
     // transfer user data to token object
     async jwt({ token, user, account }) {
-      // console.log("INSIDE JWT FUNCTION");
-      // console.log("token jwt", token);
-      // console.log("user jwt", user);
-      // console.log("account jwt", account);
       if (account?.provider === "credentials") {
-        //token.accessToken = user.token;
         token.userId = user.user._id;
         token.profilePicUrl = user.user.profilePicUrl;
-        // console.log("u signed in with credentials. token is now ", token);
+        token.username = user.user.username;
       }
       return token;
     },
     // transfer token data to session object
     async session({ session, token }) {
-      // console.log("IN SESSION FUNCTION");
-      // console.log("session is ", session);
-      // console.log("token is ", token);
-      //session.accessToken = token.accessToken;
       session.user.userId = token.userId;
       session.user.profilePicUrl = token.profilePicUrl;
-      // session stores user object (name, email, image, userID), accessToken, and expires
+      session.user.username = token.username;
       return session;
     },
   },

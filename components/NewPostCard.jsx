@@ -36,7 +36,7 @@ const formSchema = z.object({
     }),
   });
 
-const NewPostCard = ({ profileImage }) => {
+const NewPostCard = ({ profileImage, username }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -66,7 +66,7 @@ const NewPostCard = ({ profileImage }) => {
         <Dialog>
             <DialogTrigger asChild>
                 <Button className="form-textarea mt-1 block w-full rounded-md bg-gray-100 focus:outline-none dark:hover:bg-slate-300 hover:bg-slate-200 text-left text-gray-500">
-                    What's on your mind?
+                    {`What's on your mind, ${username}?`}
                 </Button>
             </DialogTrigger>
             <DialogContent className='sm:max-w-[425px]'>

@@ -25,19 +25,12 @@ export default function NavBar({ profileImage }) {
   }
 
   // Fetch authuser from session.user.userId and pass along the authuserData
-  // useEffect(() => {
-  //   async function fetchAuthuser() {
-  //     const res = await fetch(`/api/users/${session.user.userId}`);
-  //     const data = await res.json();
-  //     setAuthuserData(data.user);
-  //   }
-  //   if (status === "loading") return;
-  //   if (session) {
-  //     fetchAuthuser();
-  //   } else {
-  //     return router.push("/");
-  //   }
-  // }, [session, router, status]);
+  useEffect(() => {
+    if (status === "loading") return;
+    if (!session) {
+      return router.push("/");
+    }
+  }, [session, router, status]);
 
   useEffect(() => {
     const dark = localStorage.getItem('dark');
@@ -46,6 +39,12 @@ export default function NavBar({ profileImage }) {
     }
     setIsDark(isDarkMode());
   }, [])
+
+  // determine if dark mode is enabled before rendering page
+  const dark = localStorage.getItem('dark');
+  if (dark === 'true') {
+    document.documentElement.classList.add('dark');
+  }
 
   return (
     <div className="bg-gray-800 dark:bg-gray-800 w-full p-4 flex justify-between items-center">
