@@ -38,7 +38,8 @@ export const POST = async () => {
       });
     } catch (e) {
       console.log('cant find existing visitor')
-      throw new Error("couldnt find existing visitor");
+      return NextResponse.json({e: `cant find existing username ${username}, error is ${e}`});
+      throw new Error(e);
     }
   } else {
     // first time visitor
@@ -62,6 +63,7 @@ export const POST = async () => {
       return new Response(body, { headers: headers });
     } catch (err) {
       console.log("error: ", err);
+      return NextResponse.json({e: `cant create new visitor, error is ${err}`})
       throw new Error("cant create new user");
     }
   }
