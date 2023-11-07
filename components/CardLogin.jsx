@@ -61,6 +61,7 @@ export default function CardLogin({ switchToSignup }) {
     const res = await fetch(`/api/auth/visitor-login`, {
       method: "POST",
     });
+    console.log('res is ', res);
     const data = await res.json();
     // should return newly created (or existing) user object. Use user object to sign in, but use unhashed pw
     const signInRes = await signIn("credentials", {
