@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DateTime } from "luxon";
-import { Separator } from "./ui/separator";
-import { Button } from "./ui/button";
-import { Textarea } from "./ui/textarea";
-import { SendHorizontal } from "lucide-react";
+import { useState } from "react";
+import Comments from "./Comments";
 
 const PostCard = ({ post, profileImage }) => {
+    const [postComments, setPostComments] = useState(post.comments);
+
     function postTimeStampDisplay() {
         const postTimestamp = DateTime.fromISO(post.timestamp);
         const nowTimestamp = Date.now();
@@ -40,19 +40,7 @@ const PostCard = ({ post, profileImage }) => {
       <div className="mt-3 text-base text-gray-700 dark:text-gray-300">
         {post.content}
       </div>
-      <div className="text-center relative">
-        <Separator className='dark:bg-slate-600 bg-slate-300 m-1' />
-            <label className="" htmlFor={`comment_${post._id}`}>
-                <div className='dark:text-slate-500 text-md dark:hover:bg-slate-700 text-slate-400 hover:bg-slate-200 p-1 cursor-pointer rounded-md relative left-1 transition-colors'>Comment</div>
-            </label>
-        <Separator className='dark:bg-slate-600 bg-slate-300 m-1' />
-        <div className="flex gap-2 my-2">
-            <Image className="w-12 h-12 rounded-full" height={100} width={100} src={profileImage? profileImage : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzykHG9uAxSMQWR-w0PL11LVzi2WD9IcXruJNMu0WMWQ&s'} alt="User Profile" />
-            <Textarea id={`comment_${post._id}`} className='comment text-black rounded-md bg-gray-100 focus:outline-none w-full h-1' />
-            <button className='transition-colors p-2 stroke-black dark:stroke-white rounded-r-full hover:bg-slate-200 dark:hover:bg-slate-700 self-center'><SendHorizontal className="stroke-inherit"/></button>
-        </div>
-
-      </div>
+      <Comments postId={post._id} postComments={postComments} profileImage={profileImage} />
     </div>
   );
 };

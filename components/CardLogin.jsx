@@ -19,12 +19,15 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 const formSchema = z.object({
-  username: z.string().min(3, {
-    message: "Username must be at least 3 characters",
-  }),
-  password: z.string().min(5, {
-    message: "Password must be at least 5 characters",
-  }),
+  username: z.string().refine(value => {
+    const trimmedValue = value.trim();
+    return trimmedValue.length >= 1;
+  }, { message: "Please enter your username" }),
+
+  password: z.string().refine(value => {
+    const trimmedValue = value.trim();
+    return trimmedValue.length >= 1;
+  }, { message: "Please enter your password" }),
 });
 
 export default function CardLogin({ switchToSignup }) {
@@ -47,7 +50,6 @@ export default function CardLogin({ switchToSignup }) {
       password: values.password,
       callbackUrl: "/home",
     });
-    console.log("res is ", res);
     if (res && !res.url) {
       setLoginError(true);
       setIsSubmitting(false);
@@ -60,16 +62,14 @@ export default function CardLogin({ switchToSignup }) {
       method: "POST",
     });
     const data = await res.json();
-    console.log('data is ', data);
     // should return newly created (or existing) user object. Use user object to sign in, but use unhashed pw
     const signInRes = await signIn("credentials", {
-      redirect: false,
+      redirect: true,
       username: data.user.username,
       password: data.user.username,
       callbackUrl: "/home",
     });
 
-    console.log("login api returned response. it is ", signInRes);
     if (signInRes && !signInRes.ok) {
       setLoginLoading(false);
       setLoginFailed(true);

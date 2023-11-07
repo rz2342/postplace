@@ -31,7 +31,6 @@ export const POST = async () => {
     try {
       const regex = new RegExp(username, "i");
       const user = await User.findOne({ username: { $regex: regex } });
-      console.log('user is ', user)
       return NextResponse.json({
         user: user
       });

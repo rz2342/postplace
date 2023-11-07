@@ -1,49 +1,38 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import { isDarkMode, toggleDarkMode } from "@/lib/utils";
 import { Sun, Moon } from "lucide-react";
 import ProfileDropdown from "@/components/ProfileDropdown";
+import { useSession } from "next-auth/react";
+import { toggleDarkDB } from "@/actions";
 
 export default function NavBar({ profileImage }) {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const [authuserData, setAuthuserData] = useState({});
-  const [isDark, setIsDark] = useState();
+  const [isDark, setIsDark] = useState(false);
+  const { data : session } = useSession();
 
-  function handleSearchSubmit(e) {
-    e.preventDefault();
-    const params = new URLSearchParams([["filter", search]]);
-    router.push(`/search/?${params.toString()}`);
-    buttonRef.current.click();
-  }
-
-  // Fetch authuser from session.user.userId and pass along the authuserData
-  useEffect(() => {
-    if (status === "loading") return;
-    if (!session) {
-      return router.push("/");
-    }
-  }, [session, router, status]);
+  // function handleSearchSubmit(e) {
+  //   e.preventDefault();
+  //   const params = new URLSearchParams([["filter", search]]);
+  //   router.push(`/search/?${params.toString()}`);
+  //   buttonRef.current.click();
+  // }
 
   useEffect(() => {
-    const dark = localStorage.getItem('dark');
-    if (dark === 'true') {
-      document.documentElement.classList.add('dark');
-    }
-    setIsDark(isDarkMode());
+    // const dark = localStorage.getItem('dark');
+    // if (dark === 'true') {
+    //   document.documentElement.classList.add('dark');
+    // }
+    setIsDark(document.documentElement.classList.contains('dark'));
   }, [])
 
-  // determine if dark mode is enabled before rendering page
-  const dark = localStorage.getItem('dark');
-  if (dark === 'true') {
-    document.documentElement.classList.add('dark');
+  const handleToggle = async () => {
+    await toggleDarkDB();
+    document.documentElement.classList.toggle('dark');
+    setIsDark(prev => !prev);
   }
 
   return (
@@ -54,10 +43,7 @@ export default function NavBar({ profileImage }) {
       <div className="flex items-center gap-4">
         <ProfileDropdown profileImage={profileImage} />
         <div className="flex items-center space-x-2">
-          <Switch id="dark-mode" onCheckedChange={() => {
-            toggleDarkMode();
-            setIsDark((prev) => !prev)
-          }} checked={isDark} />
+          <Switch id="dark-mode" onCheckedChange={handleToggle} checked={isDark} />
           <Label htmlFor="dark-mode">{isDark ? <Moon /> : <Sun className='stroke-white' />}</Label>
       </div>
       </div>

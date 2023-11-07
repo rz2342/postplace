@@ -19,15 +19,20 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Name is required",
-  }),
-  username: z.string().min(3, {
-    message: "Username must be at least 3 characters",
-  }),
-  password: z.string().min(5, {
-    message: "Password must be at least 5 characters",
-  }),
+  name: z.string().refine(value => {
+    const trimmedValue = value.trim();
+    return trimmedValue.length >= 1;
+  }, { message: "Name is required" }),
+
+  username: z.string().refine(value => {
+    const trimmedValue = value.trim();
+    return trimmedValue.length >= 3;
+  }, { message: "Username must be at least 3 characters" }),
+
+  password: z.string().refine(value => {
+    const trimmedValue = value.trim();
+    return trimmedValue.length >= 6;
+  }, { message: "Password must be at least 6 characters" }),
 });
 
 export default function CardSignup({ switchToSignup }) {
@@ -42,6 +47,26 @@ export default function CardSignup({ switchToSignup }) {
     },
   });
 
+  const handleVisitorLogin = async () => {
+    setIsSubmitting(true);
+    const res = await fetch(`/api/auth/visitor-login`, {
+      method: "POST",
+    });
+    const data = await res.json();
+    // should return newly created (or existing) user object. Use user object to sign in, but use unhashed pw
+    const signInRes = await signIn("credentials", {
+      redirect: true,
+      username: data.user.username,
+      password: data.user.username,
+      callbackUrl: "/home",
+    });
+
+    if (signInRes && !signInRes.ok) {
+      setLoginLoading(false);
+      setLoginFailed(true);
+    }
+  };
+
   const handleSignup = async (values) => {
     setSignupError(false);
     setIsSubmitting(true);
@@ -54,7 +79,6 @@ export default function CardSignup({ switchToSignup }) {
       }),
     });
     const data = await res.json();
-    console.log("res is ", res);
     setIsSubmitting(false);
     if (res.status !== 201) {
       setSignupError(true);
@@ -161,6 +185,7 @@ export default function CardSignup({ switchToSignup }) {
             <div className="text-sm">
               <a
                 disabled={isSubmitting}
+                onClick={handleVisitorLogin}
                 className="font-medium cursor-pointer text-indigo-600 dark:text-purple-400 hover:text-indigo-500 dark:hover:text-purple-300"
               >
                 Log in as Guest

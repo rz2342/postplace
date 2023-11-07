@@ -10,6 +10,7 @@ const UserSchema = new Schema({
   profilePicUrl: { type: String },
   password: { type: String },
   posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+  dark: { type: Schema.Types.Boolean, default: true}
 });
 
 const User = models.User || model("User", UserSchema);

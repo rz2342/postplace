@@ -31,10 +31,11 @@ import Image from "next/image";
 
 
 const formSchema = z.object({
-    content: z.string().min(1, {
-      message: "Post cannot be empty",
-    }),
-  });
+  content: z.string().refine(value => {
+    const trimmedValue = value.trim();
+    return trimmedValue.length >= 1;
+  }, { message: "Post cannot be empty" }),
+});
 
 const NewPostCard = ({ profileImage, username }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -89,11 +90,11 @@ const NewPostCard = ({ profileImage, username }) => {
                     <Textarea
                             id='new-post'
                             className="form-textarea mt-1 block w-full rounded-md bg-gray-100 dark:bg-gray-700 focus:outline-none" 
-                            rows="3" 
                             disabled={isSubmitting}
                             {...field}
                         />
                 </FormControl>
+                <FormMessage className='text-red-500' />
               </FormItem>
             )}
           />
