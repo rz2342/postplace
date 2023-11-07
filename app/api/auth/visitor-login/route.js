@@ -27,18 +27,22 @@ export const POST = async () => {
   let username;
   if (cookieStore.get("visitor")) username = cookieStore.get("visitor").value;
   if (username) {
+    console.log('not first time visitor, username is ', username)
     // not first time visitor
     try {
       const regex = new RegExp(username, "i");
       const user = await User.findOne({ username: { $regex: regex } });
+      console.log('found user for this visitor, returning user')
       return NextResponse.json({
         user: user
       });
     } catch (e) {
+      console.log('cant find existing visitor')
       throw new Error("couldnt find existing visitor");
     }
   } else {
     // first time visitor
+    console.log('first time visitor')
     const username = generateRandomUsername();
     const hashedPassword = bcrypt.hashSync(username, 10);
     try {
@@ -48,6 +52,7 @@ export const POST = async () => {
         password: hashedPassword,
       });
       await user.save();
+      console.log('created new visitor')
       const headers = new Headers();
       // return cookie to remember visitor account
       headers.append("Set-Cookie", `visitor=${username}; Max-Age=10000000000`);
