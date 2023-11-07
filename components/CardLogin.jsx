@@ -63,6 +63,7 @@ export default function CardLogin({ switchToSignup }) {
     });
     console.log('res is ', res);
     const data = await res.json();
+    console.log('data is ', data);
     // should return newly created (or existing) user object. Use user object to sign in, but use unhashed pw
     const signInRes = await signIn("credentials", {
       redirect: true,
