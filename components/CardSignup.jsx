@@ -19,20 +19,29 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 const formSchema = z.object({
-  name: z.string().refine(value => {
-    const trimmedValue = value.trim();
-    return trimmedValue.length >= 1;
-  }, { message: "Name is required" }),
+  name: z.string().refine(
+    (value) => {
+      const trimmedValue = value.trim();
+      return trimmedValue.length >= 1;
+    },
+    { message: "Name is required" },
+  ),
 
-  username: z.string().refine(value => {
-    const trimmedValue = value.trim();
-    return trimmedValue.length >= 3;
-  }, { message: "Username must be at least 3 characters" }),
+  username: z.string().refine(
+    (value) => {
+      const trimmedValue = value.trim();
+      return trimmedValue.length >= 3;
+    },
+    { message: "Username must be at least 3 characters" },
+  ),
 
-  password: z.string().refine(value => {
-    const trimmedValue = value.trim();
-    return trimmedValue.length >= 6;
-  }, { message: "Password must be at least 6 characters" }),
+  password: z.string().refine(
+    (value) => {
+      const trimmedValue = value.trim();
+      return trimmedValue.length >= 6;
+    },
+    { message: "Password must be at least 6 characters" },
+  ),
 });
 
 export default function CardSignup({ switchToSignup }) {

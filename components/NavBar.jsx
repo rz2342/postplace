@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { Sun, Moon } from "lucide-react";
 import ProfileDropdown from "@/components/ProfileDropdown";
 import { useSession } from "next-auth/react";
@@ -12,7 +12,7 @@ import { toggleDarkDB } from "@/actions";
 
 export default function NavBar({ profileImage }) {
   const [isDark, setIsDark] = useState(false);
-  const { data : session } = useSession();
+  const { data: session } = useSession();
 
   // function handleSearchSubmit(e) {
   //   e.preventDefault();
@@ -26,26 +26,30 @@ export default function NavBar({ profileImage }) {
     // if (dark === 'true') {
     //   document.documentElement.classList.add('dark');
     // }
-    setIsDark(document.documentElement.classList.contains('dark'));
-  }, [])
+    setIsDark(document.documentElement.classList.contains("dark"));
+  }, []);
 
   const handleToggle = async () => {
     await toggleDarkDB();
-    document.documentElement.classList.toggle('dark');
-    setIsDark(prev => !prev);
-  }
+    document.documentElement.classList.toggle("dark");
+    setIsDark((prev) => !prev);
+  };
 
   return (
     <div className="bg-gray-800 dark:bg-gray-800 w-full p-4 flex justify-between items-center">
-      <h1 className="text-2xl font-bold text-white">
-        PostPlace
-      </h1>
+      <h1 className="text-2xl font-bold text-white">PostPlace</h1>
       <div className="flex items-center gap-4">
         <ProfileDropdown profileImage={profileImage} />
         <div className="flex items-center space-x-2">
-          <Switch id="dark-mode" onCheckedChange={handleToggle} checked={isDark} />
-          <Label htmlFor="dark-mode">{isDark ? <Moon /> : <Sun className='stroke-white' />}</Label>
-      </div>
+          <Switch
+            id="dark-mode"
+            onCheckedChange={handleToggle}
+            checked={isDark}
+          />
+          <Label htmlFor="dark-mode">
+            {isDark ? <Moon /> : <Sun className="stroke-white" />}
+          </Label>
+        </div>
       </div>
     </div>
   );

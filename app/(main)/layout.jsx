@@ -1,6 +1,6 @@
 import Provider from "@/components/Provider";
 import NavBar from "@/components/NavBar";
-import "@/globals.css"
+import "@/globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
@@ -14,23 +14,24 @@ export const metadata = {
 const RootLayout = async ({ children }) => {
   const session = await getServerSession(authOptions);
   if (!session) {
-    redirect('/');
+    redirect("/");
   }
   await connectToDB();
   const user = await User.findById(session.user.userId);
   const dark = user.dark;
   return (
-  <html lang="en" className={dark? 'dark' : ''}>
-    <body className='bg-slate-300 dark:bg-slate-900'>
-      <Provider>
-        <div>
-          <NavBar profileImage={session.user.profilePicUrl} />
-          <main>{children}</main>
-          {/*<Footer />*/}
-        </div>
-      </Provider>
-    </body>
-  </html>
-)};
+    <html lang="en" className={dark ? "dark" : ""}>
+      <body className="bg-slate-300 dark:bg-slate-900">
+        <Provider>
+          <div>
+            <NavBar profileImage={session.user.profilePicUrl} />
+            <main>{children}</main>
+            {/*<Footer />*/}
+          </div>
+        </Provider>
+      </body>
+    </html>
+  );
+};
 
 export default RootLayout;

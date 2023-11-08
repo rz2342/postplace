@@ -19,15 +19,21 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 
 const formSchema = z.object({
-  username: z.string().refine(value => {
-    const trimmedValue = value.trim();
-    return trimmedValue.length >= 1;
-  }, { message: "Please enter your username" }),
+  username: z.string().refine(
+    (value) => {
+      const trimmedValue = value.trim();
+      return trimmedValue.length >= 1;
+    },
+    { message: "Please enter your username" },
+  ),
 
-  password: z.string().refine(value => {
-    const trimmedValue = value.trim();
-    return trimmedValue.length >= 1;
-  }, { message: "Please enter your password" }),
+  password: z.string().refine(
+    (value) => {
+      const trimmedValue = value.trim();
+      return trimmedValue.length >= 1;
+    },
+    { message: "Please enter your password" },
+  ),
 });
 
 export default function CardLogin({ switchToSignup }) {

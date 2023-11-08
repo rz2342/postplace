@@ -12,15 +12,15 @@ export const metadata = {
 const RootLayout = async ({ children }) => {
   const session = await getServerSession(authOptions);
   if (session) {
-    redirect('/home');
+    redirect("/home");
   }
   return (
-  <html lang="en" className="dark">
-    <body className="relative">
-      <Provider>{children}</Provider>
-    </body>
-  </html>
-  )
+    <html lang="en" className="dark">
+      <body className="relative">
+        <Provider>{children}</Provider>
+      </body>
+    </html>
+  );
 };
 
 export default RootLayout;
