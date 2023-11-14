@@ -9,7 +9,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function POST(req, context) {
   await connectToDB();
-  console.log("inside making post api call");
   const session = await getServerSession(authOptions);
   const { content } = await req.json();
   const userId = session.user.userId;

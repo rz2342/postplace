@@ -1,18 +1,6 @@
 import {
-  Cloud,
-  CreditCard,
-  Github,
-  Keyboard,
-  LifeBuoy,
   LogOut,
-  Mail,
-  MessageSquare,
-  Plus,
-  PlusCircle,
-  Settings,
   User,
-  UserPlus,
-  Users,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -41,7 +29,7 @@ const ProfileDropdown = ({ profileImage }) => {
         <Button variant="outline" size="circle" className="relative">
           <Image
             className="rounded-full"
-            src={
+            src={ 
               profileImage
                 ? profileImage
                 : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzykHG9uAxSMQWR-w0PL11LVzi2WD9IcXruJNMu0WMWQ&s"

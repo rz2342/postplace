@@ -5,7 +5,6 @@ import connectToDB from "@/db.mjs";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { UserCircle } from "lucide-react";
 
 export async function GET() {
   await connectToDB();
@@ -17,7 +16,8 @@ export async function GET() {
         populate: {
           path: "user",
         },
-      });
+      })
+      .sort({ _id: -1 });
     return NextResponse.json({ posts });
   } catch (err) {
     console.log(err);
@@ -37,6 +37,7 @@ export async function POST(req) {
     });
     await post.save();
     user.posts.push(post);
+    await user.save();
     return NextResponse.json({ post }, { status: 201 });
   } catch (err) {
     console.log("error creating a post: ", err);
