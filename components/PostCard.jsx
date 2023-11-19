@@ -60,7 +60,7 @@ const PostCard = ({ post, user }) => {
           </div>
         </div>
         <div>
-          {JSON.parse(post).user._id === JSON.parse(user).userId ? (
+          {JSON.parse(post).user._id === JSON.parse(user)._id ? (
             <DeletePostIcon postId={JSON.parse(post)._id} />
           ) : null}
         </div>
