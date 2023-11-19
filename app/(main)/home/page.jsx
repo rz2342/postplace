@@ -21,6 +21,7 @@ const getAllPosts = async () => {
 };
 
 const Page = async () => {
+  await connectToDB();
   const session = await getServerSession(authOptions);
   const user = await User.findById(session.user.userId);
   let posts, error;

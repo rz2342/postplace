@@ -27,6 +27,7 @@ const getUserPosts = async (session) => {
 };
 
 const Page = async () => {
+  await connectToDB();
   const session = await getServerSession(authOptions);
   const posts = await getUserPosts(session);
   const user = await User.findById(session.user.userId);
