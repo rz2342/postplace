@@ -125,7 +125,7 @@ const Comments = ({ postId, user, postComments, setPostComments }) => {
         </form>
       </Form>
       {postComments?.map((comment) => (
-        <Comment comment={comment} />
+        <Comment comment={comment} key={comment._id} />
       ))}
     </>
   );

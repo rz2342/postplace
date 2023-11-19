@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -6,13 +7,13 @@ import { postTimeStampDisplay } from "@/lib/utils";
 import DeletePostIcon from "./DeletePostIcon";
 
 const PostCard = ({ post, user }) => {
-  const [postComments, setPostComments] = useState(post.comments);
+  const [postComments, setPostComments] = useState(JSON.parse(post).comments);
 
   return (
     <div className="bg-white dark:bg-gray-800 p-5 rounded-md shadow-md flex flex-col gap-4 max-w-2xl w-full">
       <div className="flex items-center justify-between">
         <div className="flex space-x-3">
-          <Link href={`/users/${post.user._id}`}>
+          <Link href={`/users/${JSON.parse(post).user._id}`}>
             <Image
               className="w-12 h-12 rounded-full"
               height={100}
@@ -28,29 +29,29 @@ const PostCard = ({ post, user }) => {
           <div className="text-sm space-y-1">
             <div className="font-bold text-base">
               <Link
-                href={`/users/${post.user._id}`}
+                href={`/users/${JSON.parse(post).user._id}`}
                 className="dark:text-sky-400 dark:hover:text-sky-500 text-sky-600 hover:text-sky-700"
               >
-                {post.user.username}
+                {JSON.parse(post).user.username}
               </Link>
             </div>
             <div className="text-gray-500 dark:text-gray-300">
-              {postTimeStampDisplay(post.timestamp)}
+              {postTimeStampDisplay(JSON.parse(post).timestamp)}
             </div>
           </div>
         </div>
         <div>
-          {post.user._id === user.userId? <DeletePostIcon postId={post._id} /> : null}
+          {JSON.parse(post).user._id === JSON.parse(user).userId? <DeletePostIcon postId={JSON.parse(post)._id} /> : null}
         </div>
       </div>
       <div className="mt-3 text-base text-gray-700 dark:text-gray-300 break-all">
-        {post.content}
+        {JSON.parse(post).content}
       </div>
       <Comments
-        postId={post._id}
-        postComments={postComments}
+        postId={JSON.parse(post)._id}
+        postComments={JSON.parse(post).comments}
         setPostComments={setPostComments}
-        user={user}
+        user={JSON.parse(user)}
       />
     </div>
   );

@@ -1,30 +1,26 @@
-"use client";
-import { useState, useEffect } from "react";
-import { Loader } from "lucide-react";
+// import { Loader } from "lucide-react";
 import PostCard from "./PostCard";
+import NewPostCard from "./NewPostCard";
+import ProfileSection from "./ProfileSection";
 
-const FeedList = ({ user }) => {
-  const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  useEffect(() => {
-    const getPosts = async () => {
-      setIsLoading(true);
-      const res = await fetch("/api/posts");
-      const data = await res.json();
-      setPosts(data.posts);
-      setIsLoading(false);
-    };
-    getPosts();
-  }, []);
+const FeedList = ({ user, posts, feedType }) => {
   const allPosts = posts.map((postObj) => (
-    <PostCard key={postObj._id} post={postObj} user={user} />
+    <PostCard key={postObj._id} post={JSON.stringify(postObj)} user={JSON.stringify(user)} />
   ));
-  if (isLoading) {
-    return <Loader />;
-  } else if (allPosts.length === 0) {
-    return <>No posts yet...</>;
-  }
-  return <>{allPosts}</>;
+  return (
+    <div className="flex flex-col gap-6 items-center py-10">
+      {feedType != 'all' && <ProfileSection user={user} feedType={feedType} />}
+      {feedType != 'user' && (
+      <NewPostCard
+        profileImage={user.profilePicUrl}
+        name={user.name}
+      />)}
+      <div className='text-2xl max-w-2xl relative w-full'>{feedType === 'user'? `${user.username}'s posts`: 'All posts'}</div>
+      <div className="flex flex-col gap-10 items-center py-1 max-w-2xl w-full">
+        {allPosts.length === 0? <>No posts yet...</> : <>{allPosts}</>}
+      </div>
+    </div>
+  );
 };
 
 export default FeedList;

@@ -13,7 +13,6 @@ import {
   } from "@/components/ui/alert-dialog"
 
   const handleDelete = async (postId) => {
-    console.log('hi')
     const res = await fetch(`/api/posts/${postId}`, {
         method: "DELETE",
       });
