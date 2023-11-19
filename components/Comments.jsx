@@ -56,15 +56,9 @@ const Comments = ({ postId, user, postComments, setPostComments }) => {
     const data = await res.json();
     if (res.status === 201) {
       setPostComments([
+        // put new comment before prev comments so most recent ones show first
+        data.comment,
         ...postComments,
-        {
-          ...data.comment,
-          user: {
-            ...data.comment.user,
-            profilePicUrl: user.profilePicUrl,
-            name: user.name,
-          },
-        },
       ]);
       form.reset();
     } else {
@@ -72,7 +66,6 @@ const Comments = ({ postId, user, postComments, setPostComments }) => {
     }
     setIsSubmitting(false);
   };
-  console.log(postComments);
   return (
     <>
       <Form {...form}>
@@ -125,7 +118,7 @@ const Comments = ({ postId, user, postComments, setPostComments }) => {
         </form>
       </Form>
       {postComments?.map((comment) => (
-        <Comment comment={comment} key={comment._id} />
+        <Comment comment={comment} user={user} key={comment._id} />
       ))}
     </>
   );

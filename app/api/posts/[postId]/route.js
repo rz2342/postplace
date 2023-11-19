@@ -16,7 +16,10 @@ export async function DELETE(req, context) {
     const currentUser = await User.findById(userId);
     await Post.deleteOne({ _id: postId });
     // delete from posts array
-    currentUser.posts.splice(currentUser.posts.findIndex(id => id === postId), 1);
+    currentUser.posts.splice(
+      currentUser.posts.findIndex((id) => id === postId),
+      1,
+    );
     await currentUser.save();
     return NextResponse.json({ status: 201 });
   } catch (err) {

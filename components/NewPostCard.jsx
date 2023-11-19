@@ -38,7 +38,7 @@ const formSchema = z.object({
   ),
 });
 
-const NewPostCard = ({ profileImage, user }) => {
+const NewPostCard = ({ user }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -66,8 +66,8 @@ const NewPostCard = ({ profileImage, user }) => {
       <Image
         className="w-12 h-12 rounded-full"
         src={
-          profileImage
-            ? profileImage
+          JSON.parse(user).profilePicUrl
+            ? JSON.parse(user).profilePicUrl
             : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzykHG9uAxSMQWR-w0PL11LVzi2WD9IcXruJNMu0WMWQ&s"
         }
         alt="User Profile"

@@ -6,9 +6,9 @@ import Comment from "@/models/Comment";
 import Post from "@/models/Post";
 import connectToDB from "@/db.mjs";
 
-const getUserPosts = async (session) => {
+const getUserPosts = async (userId) => {
   await connectToDB();
-  const currentUser = await User.findById(session.user.userId).populate({
+  const currentUser = await User.findById(userId).populate({
     path: "posts", // populate 'posts'
     options: { sort: { _id: -1 } }, // sort posts by '_id' in descending order
     populate: [
@@ -26,13 +26,19 @@ const getUserPosts = async (session) => {
   return currentUser.posts;
 };
 
-const Page = async () => {
+const Page = async ({ params }) => {
   const session = await getServerSession(authOptions);
-  const posts = await getUserPosts(session);
+  const posts = await getUserPosts(params.userId);
   const user = await User.findById(session.user.userId);
+  const feedUser = await User.findById(params.userId);
   return (
     <>
-      <FeedList user={user} posts={posts} feedType={"profile"} />
+      <FeedList
+        user={user}
+        posts={posts}
+        feedType={"user"}
+        feedUser={feedUser}
+      />
     </>
   );
 };

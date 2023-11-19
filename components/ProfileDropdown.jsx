@@ -1,7 +1,4 @@
-import {
-  LogOut,
-  User,
-} from "lucide-react";
+import { LogOut, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -30,7 +27,7 @@ const ProfileDropdown = ({ user }) => {
         <Button variant="outline" size="circle" className="relative">
           <Image
             className="rounded-full"
-            src={ 
+            src={
               JSON.parse(user).profilePicUrl
                 ? JSON.parse(user).profilePicUrl
                 : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzykHG9uAxSMQWR-w0PL11LVzi2WD9IcXruJNMu0WMWQ&s"
@@ -44,7 +41,10 @@ const ProfileDropdown = ({ user }) => {
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem className="cursor-pointer" onClick={() => router.push('/profile')}>
+          <DropdownMenuItem
+            className="cursor-pointer"
+            onClick={() => router.push("/profile")}
+          >
             <User className="mr-2 h-4 w-4" />
             <span>Profile</span>
           </DropdownMenuItem>

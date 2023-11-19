@@ -2,10 +2,16 @@ import Image from "next/image";
 import { postTimeStampDisplay } from "@/lib/utils";
 import Link from "next/link";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, user }) => {
   return (
     <div className="flex gap-3 my-2 w-full">
-      <Link href={`/users/${comment.user._id}`}>
+      <Link
+        href={
+          comment.user._id === user._id
+            ? "/profile"
+            : `/users/${comment.user._id}`
+        }
+      >
         <Image
           className="min-w-12 w-12 h-12 rounded-full min-h-[3rem] min-w-[3rem]"
           height={100}
@@ -22,7 +28,11 @@ const Comment = ({ comment }) => {
         <div>
           <span className="font-bold text-base">
             <Link
-              href={`/users/${comment.user._id}`}
+              href={
+                comment.user._id === user._id
+                  ? "/profile"
+                  : `/users/${comment.user._id}`
+              }
               className="dark:text-sky-400 dark:hover:text-sky-500 text-sky-600 hover:text-sky-700"
             >
               {comment.user.name}

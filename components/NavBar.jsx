@@ -31,7 +31,9 @@ export default function NavBar({ user }) {
 
   return (
     <div className="bg-gray-800 dark:bg-gray-800 w-full p-4 flex justify-between items-center">
-      <h1 className="text-2xl font-bold text-white"><Link href={'/'}>PostPlace</Link></h1>
+      <h1 className="text-2xl font-bold text-white">
+        <Link href={"/"}>PostPlace</Link>
+      </h1>
       <div className="flex items-center gap-4">
         <ProfileDropdown user={user} />
         <div className="flex items-center space-x-2">

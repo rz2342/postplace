@@ -1,35 +1,34 @@
 import { Trash2Icon } from "lucide-react";
 
 import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-    AlertDialogTrigger,
-  } from "@/components/ui/alert-dialog"
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
-  const handleDelete = async (postId) => {
-    const res = await fetch(`/api/posts/${postId}`, {
-        method: "DELETE",
-      });
-      if (res.status === 201 || res.status === 200) {
-        location.reload();
-      }
-      else {
-        console.log(res.status)
-      }
+const handleDelete = async (postId) => {
+  const res = await fetch(`/api/posts/${postId}`, {
+    method: "DELETE",
+  });
+  if (res.status === 201 || res.status === 200) {
+    location.reload();
+  } else {
+    console.log(res.status);
   }
+};
 
 const DeletePostIcon = ({ postId }) => {
-    return (
-        <>
-            <AlertDialog>
+  return (
+    <>
+      <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Trash2Icon className='cursor-pointer' />
+          <Trash2Icon className="cursor-pointer" />
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -40,12 +39,14 @@ const DeletePostIcon = ({ postId }) => {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={() => handleDelete(postId)}>Continue</AlertDialogAction>
+            <AlertDialogAction onClick={() => handleDelete(postId)}>
+              Continue
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-        </>
-    )
-}
+    </>
+  );
+};
 
 export default DeletePostIcon;

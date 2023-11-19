@@ -27,7 +27,14 @@ export async function POST(req, context) {
     await comment.save();
     post.comments.push(comment);
     await post.save();
-    return NextResponse.json({ post, comment }, { status: 201 });
+    // the Comment component needs the comment populated
+    const populatedComment = await Comment.findById(comment._id).populate(
+      "user",
+    );
+    return NextResponse.json(
+      { post, comment: populatedComment },
+      { status: 201 },
+    );
   } catch (err) {
     return NextResponse.json({ error: err }, { status: 502 });
   }
