@@ -39,22 +39,18 @@ export const authOptions = {
         return true;
       }
     },
-    // transfer user data to token object
+    // transfer user data to token object. Only store static info in session
     async jwt({ token, user, account }) {
       if (account?.provider === "credentials") {
         token.userId = user.user._id;
-        token.profilePicUrl = user.user.profilePicUrl;
         token.username = user.user.username;
-        token.name = user.user.name;
       }
       return token;
     },
-    // transfer token data to session object
+    // transfer token data to session object. Only store static info in session
     async session({ session, token }) {
       session.user.userId = token.userId;
-      session.user.profilePicUrl = token.profilePicUrl;
       session.user.username = token.username;
-      session.user.name = token.name;
       return session;
     },
   },

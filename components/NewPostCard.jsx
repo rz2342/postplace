@@ -14,7 +14,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
 
 import {
   Dialog,
@@ -39,7 +38,7 @@ const formSchema = z.object({
   ),
 });
 
-const NewPostCard = ({ profileImage, name }) => {
+const NewPostCard = ({ profileImage, user }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -79,7 +78,7 @@ const NewPostCard = ({ profileImage, name }) => {
       <Dialog>
         <DialogTrigger asChild>
           <Button className="form-textarea mt-1 block w-full rounded-md bg-gray-100 focus:outline-none dark:hover:bg-slate-300 hover:bg-slate-200 text-left text-gray-500">
-            {`What's on your mind, ${name}?`}
+            {`What's on your mind, ${JSON.parse(user).name}?`}
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">

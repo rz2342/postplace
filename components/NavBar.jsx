@@ -8,7 +8,7 @@ import { Sun, Moon } from "lucide-react";
 import ProfileDropdown from "@/components/ProfileDropdown";
 import { toggleDarkDB } from "@/actions";
 
-export default function NavBar({ profileImage }) {
+export default function NavBar({ user }) {
   const [isDark, setIsDark] = useState(false);
 
   // function handleSearchSubmit(e) {
@@ -33,7 +33,7 @@ export default function NavBar({ profileImage }) {
     <div className="bg-gray-800 dark:bg-gray-800 w-full p-4 flex justify-between items-center">
       <h1 className="text-2xl font-bold text-white"><Link href={'/'}>PostPlace</Link></h1>
       <div className="flex items-center gap-4">
-        <ProfileDropdown profileImage={profileImage} />
+        <ProfileDropdown user={user} />
         <div className="flex items-center space-x-2">
           <Switch
             id="dark-mode"

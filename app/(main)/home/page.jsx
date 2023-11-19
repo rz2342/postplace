@@ -22,6 +22,7 @@ const getAllPosts = async () => {
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
+  const user = await User.findById(session.user.userId);
   let posts, error;
   try {
     posts = await getAllPosts();
@@ -31,7 +32,7 @@ const Page = async () => {
   }
   return (
     <>
-      {error? `Error retrieving posts: ${error}` : <FeedList user={session.user} posts={posts} feedType={'all'} />}
+      {error? `Error retrieving posts: ${error}` : <FeedList user={user} posts={posts} feedType={'all'} />}
     </>
   );
 };

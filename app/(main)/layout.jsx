@@ -24,7 +24,7 @@ const RootLayout = async ({ children }) => {
       <body className="bg-slate-300 dark:bg-slate-900">
         <Provider>
           <div>
-            <NavBar profileImage={session.user.profilePicUrl} />
+            <NavBar user={JSON.stringify(user)} />
             <main>{children}</main>
             {/*<Footer />*/}
           </div>

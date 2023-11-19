@@ -19,8 +19,8 @@ const PostCard = ({ post, user }) => {
               height={100}
               width={100}
               src={
-                user.profilePicUrl
-                  ? user.profilePicUrl
+                JSON.parse(user).profilePicUrl
+                  ? JSON.parse(user).profilePicUrl
                   : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzykHG9uAxSMQWR-w0PL11LVzi2WD9IcXruJNMu0WMWQ&s"
               }
               alt="User Profile"
@@ -32,7 +32,7 @@ const PostCard = ({ post, user }) => {
                 href={`/users/${JSON.parse(post).user._id}`}
                 className="dark:text-sky-400 dark:hover:text-sky-500 text-sky-600 hover:text-sky-700"
               >
-                {JSON.parse(post).user.username}
+                {JSON.parse(post).user.name}
               </Link>
             </div>
             <div className="text-gray-500 dark:text-gray-300">

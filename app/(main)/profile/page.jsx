@@ -31,9 +31,10 @@ const getUserPosts = async (session) => {
 const Page = async () => {
   const session = await getServerSession(authOptions);
   const posts = await getUserPosts(session);
+  const user = await User.findById(session.user.userId);
   return (
     <>
-        <FeedList user={session.user} posts={posts} feedType={'profile'} />
+        <FeedList user={user} posts={posts} feedType={'profile'} />
     </>
   );
 };
