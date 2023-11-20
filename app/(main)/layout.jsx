@@ -13,13 +13,15 @@ export const metadata = {
 
 const RootLayout = async ({ children }) => {
   const session = await getServerSession(authOptions);
+  console.log('in (main) layout. sessoin is ', session);
   if (!session) {
     redirect("/");
   }
   await connectToDB();
+  console.log('in main layout. session user userid is ', session.user.userId);
   const user = await User.findById(session.user.userId);
   console.log('in (main) layout. user is ', user)
-  const dark = user?.dark;
+  const dark = user.dark;
   return (
     <html lang="en" className={dark ? "dark" : ""}>
       <body className="bg-slate-300 dark:bg-slate-900">
