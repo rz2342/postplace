@@ -11,15 +11,7 @@ import { Sun, Moon } from "lucide-react";
 
 const SignIn = () => {
   const [signupCard, setSignupCard] = useState(false);
-  const { data: session, status } = useSession();
   const [isDark, setIsDark] = useState();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (session && session.user) {
-      return router.push("/home");
-    }
-  }, [router, session]);
 
   useEffect(() => {
     const dark = localStorage.getItem("dark");
