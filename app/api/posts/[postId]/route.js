@@ -21,6 +21,8 @@ export async function DELETE(req, context) {
       1,
     );
     await currentUser.save();
+    // delete all comments under this post
+    await Comment.deleteMany({ post: postId });
     return NextResponse.json({ status: 201 });
   } catch (err) {
     return NextResponse.json({ error: err }, { status: 404 });
