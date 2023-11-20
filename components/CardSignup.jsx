@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { signIn } from "next-auth/react";
+import { LoaderIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -94,7 +95,7 @@ export default function CardSignup({ switchToSignup }) {
     } else {
       setSignupError(false);
       const res = await signIn("credentials", {
-        redirect: false,
+        redirect: true,
         username: values.username,
         password: values.password,
         callbackUrl: "/home", // should redirect to home page after successful signup
@@ -202,6 +203,12 @@ export default function CardSignup({ switchToSignup }) {
             </div>
           </div>
         </form>
+        {isSubmitting && (
+          <div className="text-gray-500 flex gap-1">
+            <LoaderIcon />
+            Logging in...
+          </div>
+        )}
       </Form>
     </div>
   );
