@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession, signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import CardLogin from "@/components/CardLogin";
 import CardSignup from "@/components/CardSignup";
 import { Label } from "@/components/ui/label";

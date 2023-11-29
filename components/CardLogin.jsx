@@ -169,7 +169,7 @@ export default function CardLogin({ switchToSignup }) {
         </form>
         {isSubmitting && (
           <div className="text-gray-500 flex gap-1">
-            <LoaderIcon />
+            <LoaderIcon className="animate-spin" />
             Logging in...
           </div>
         )}

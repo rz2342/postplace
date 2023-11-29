@@ -6,17 +6,11 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Sun, Moon } from "lucide-react";
 import ProfileDropdown from "@/components/ProfileDropdown";
+import SearchButton from "./SearchButton";
 import { toggleDarkDB } from "@/actions";
 
 export default function NavBar({ user }) {
   const [isDark, setIsDark] = useState(false);
-
-  // function handleSearchSubmit(e) {
-  //   e.preventDefault();
-  //   const params = new URLSearchParams([["filter", search]]);
-  //   router.push(`/search/?${params.toString()}`);
-  //   buttonRef.current.click();
-  // }
 
   useEffect(() => {
     // set correct toggle
@@ -35,6 +29,7 @@ export default function NavBar({ user }) {
         <Link href={"/"}>PostPlace</Link>
       </h1>
       <div className="flex items-center gap-4">
+        <SearchButton />
         <ProfileDropdown user={user} />
         <div className="flex items-center space-x-2">
           <Switch
